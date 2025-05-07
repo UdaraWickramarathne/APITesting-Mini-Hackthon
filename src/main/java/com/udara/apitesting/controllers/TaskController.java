@@ -28,7 +28,7 @@ public class TaskController {
             return new ResponseEntity<>(apiTestingResponse, HttpStatus.OK);
         }
         // Bug: Changed status to "failed" instead of "successful"
-        ApiTestingResponse<Task> apiTestingResponse = new ApiTestingResponse<>(false, tasks, "Tasks retrieved successfully");
+        ApiTestingResponse<Task> apiTestingResponse = new ApiTestingResponse<>(true, tasks, "Tasks retrieved successfully");
         return new ResponseEntity<>(apiTestingResponse, HttpStatus.OK);
     }
 
