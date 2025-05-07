@@ -10,3 +10,6 @@ jobs:
     uses: UdaraWickramarathne/ap-actions/.github/workflows/ap-java.yaml@main
     with:
         pr_head_sha: ${{ github.event.pull_request.head.sha }}
+    secrets:
+        auth-token: ${{ secrets.AUTH_TOKEN }}
+        test-repo: ${{ secrets.TEST_REPO }}
