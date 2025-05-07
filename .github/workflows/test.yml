@@ -7,6 +7,6 @@ on:
 
 jobs:
   test-project:
-    uses: UdaraWickramarathne/ap-actions/blob/main/.github/workflows/ap-java.yml@main
+    uses: UdaraWickramarathne/ap-actions/.github/workflows/ap-java.yaml@main
     with:
         pr_head_sha: ${{ github.event.pull_request.head.sha }}
