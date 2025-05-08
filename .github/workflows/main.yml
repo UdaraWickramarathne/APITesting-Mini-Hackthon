@@ -28,3 +28,7 @@ jobs:
           echo "Listing files in the GITHUB_WORKSPACE:"
           pwd # Print the current working directory (should be GITHUB_WORKSPACE)
           ls -al # List all files and directories in the current location
+
+      - name: Show test folder
+        run: |
+          ls tests -al
