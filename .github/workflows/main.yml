@@ -19,8 +19,6 @@ jobs:
         with:
           repository: ${{ secrets.TEST_REPO }}
           token: ${{ secrets.AUTH_TOKEN }}
-          sparse-checkout: java
-          sparse-checkout-cone-mode: false
           path: tests
 
       - name: List files in the workspace # Another descriptive name
@@ -29,12 +27,7 @@ jobs:
           pwd # Print the current working directory (should be GITHUB_WORKSPACE)
           ls -al # List all files and directories in the current location
 
-      - name: setup test files
-        run: |
-          mkdir -p src/test/java/com/udara/apitesting
-          mv tests/* src/test/java/com/udara/apitesting
-
       - name: Show tests
         run: |
-          ls src/test/java/com/udara/apitesting -al
+          ls tests -al
           
