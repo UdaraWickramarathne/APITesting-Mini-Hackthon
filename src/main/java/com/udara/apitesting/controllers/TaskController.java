@@ -28,7 +28,7 @@ public class TaskController {
             return new ResponseEntity<>(apiTestingResponse, HttpStatus.OK);
         }
         // Bug: Changed status to "failed" instead of "successful"
-        ApiTestingResponse<Task> apiTestingResponse = new ApiTestingResponse<>(false, tasks, "Tasks retrieved successfully");
+        ApiTestingResponse<Task> apiTestingResponse = new ApiTestingResponse<>(true, tasks, "Tasks retrieved successfully");
         return new ResponseEntity<>(apiTestingResponse, HttpStatus.OK);
     }
 
@@ -39,14 +39,14 @@ public class TaskController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiTestingResponse<>(false, null, "Task added failed"));
         }
         // Bug: Return OK status instead of CREATED status
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiTestingResponse<>(newTask));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiTestingResponse<>(newTask));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiTestingResponse<Task>> updateTask(@PathVariable Long id, @RequestBody Task task) {
         try {
             // Bug: Passing null instead of task
-            Task updated = taskService.updateTask(id, null);
+            Task updated = taskService.updateTask(id, task);
             return ResponseEntity.status(HttpStatus.OK).body(new ApiTestingResponse<>(updated));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiTestingResponse<>(false, null, e.getMessage()));
@@ -58,7 +58,7 @@ public class TaskController {
         try{
             taskService.deleteTask(id);
             // Bug: Return incorrect response structure missing "successful" status
-            return ResponseEntity.status(HttpStatus.OK).body(new ApiTestingResponse<>(false, null, "Task deleted"));
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiTestingResponse<>(true, null, "Task deleted"));
         }catch (RuntimeException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiTestingResponse<>(false, null, e.getMessage()));
         }
